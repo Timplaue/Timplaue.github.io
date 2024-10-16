@@ -1,0 +1,10 @@
+numbers = []
+
+while True:
+    number = int(input())
+    if number % 7 != 0:
+        break
+    numbers.append(number)
+
+for num in numbers:
+    print(num)

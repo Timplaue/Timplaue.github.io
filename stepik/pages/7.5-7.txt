@@ -1,0 +1,21 @@
+n = int(input())
+sum_digits = 0
+count_digits = 0
+prod_digits = 1
+last_digit = n % 10
+first_digit = n
+
+while n > 0:
+    digit = n % 10
+    sum_digits += digit
+    count_digits += 1
+    prod_digits *= digit
+    first_digit = digit
+    n //= 10
+
+print(sum_digits)
+print(count_digits)
+print(prod_digits)
+print(sum_digits / count_digits)
+print(first_digit)
+print(first_digit + last_digit)

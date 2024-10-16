@@ -1,0 +1,11 @@
+price = int(input())
+
+denominations = [25, 10, 5, 1]
+
+count_of_coins = 0
+
+for coin in denominations:
+    count_of_coins += price // coin
+    price %= coin
+
+print(count_of_coins)

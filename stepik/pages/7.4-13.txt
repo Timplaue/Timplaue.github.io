@@ -1,0 +1,10 @@
+count_of_fives = 0
+
+while True:
+    score = int(input())
+    if score <= 0 or score > 5:
+        break
+    if score == 5:
+        count_of_fives += 1
+
+print(count_of_fives)

@@ -1,0 +1,10 @@
+words = []
+
+while True:
+    word = input()
+    if word.lower() == "конец":
+        break
+    words.append(word)
+
+for w in words:
+    print(w)

@@ -1,0 +1,91 @@
+body {
+    background-color:#0b0a0f;
+    margin: 0;
+}
+@media (min-width: 1440px) {
+    .layout {
+        margin: 0 auto;
+        max-width: 1366px;
+    }
+}
+@media (min-width: 1366px) {
+    .layout {
+        max-width: 1347px;
+        margin-left: 1.5em;
+    }
+}
+@media (min-width: 1024px) {
+    .layout {
+        max-width: 1010px;
+    }
+}
+@media (min-width: 768px) {
+    .layout {
+        max-width: 1035px;
+    }
+}
+@media (min-width: 320px) {
+    .layout {
+        margin: 0 auto;
+    }
+}
+.block1 {
+    background-color: #ffffff;
+    height: 100%;
+    max-width: 1024px;
+    justify-content: space-between;
+    font-family: Opensansregular;
+    padding-left: 6em;
+}
+.layout {
+    height: 100%;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin: 0px auto;
+    min-width: 250px;
+}
+.header {
+    min-height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: var(--header-color);
+    border-radius: 0 0 16px 16px;
+    padding: 0 30px;
+    background-color: #12121a;
+}
+.text_red {
+    color: red;
+}
+a, a:visited {
+    text-decoration: none;
+}
+a {
+    text-decoration: none;
+    color: var(--text-color);
+}
+.logo {
+    max-width: 48px;
+    width: 100%;
+    position: absolute;
+    justify-content: inherit;
+    left: 50px;
+    top: 20px;
+}
+.logo img {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+}
+h5 {
+    color: white;
+    font-family: Opensansbold;
+}
+.site_name {
+    font-size: 20px;
+    font-weight: 500;
+}
