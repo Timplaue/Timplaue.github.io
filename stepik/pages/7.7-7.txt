@@ -1,0 +1,6 @@
+n = int(input())
+first_digit = n
+while n >= 10:
+    n //= 10
+first_digit = n
+print(first_digit)

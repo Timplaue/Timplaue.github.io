@@ -1,0 +1,13 @@
+mx = None
+s = 0
+for i in range(10):
+    x = int(input())
+    if x < 0:
+        s += x
+        if mx is None or x > mx:
+            mx = x
+if mx is not None:
+    print(s)
+    print(mx)
+else:
+    print('NO')
