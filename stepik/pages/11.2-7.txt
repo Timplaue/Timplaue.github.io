@@ -1,0 +1,4 @@
+rainbow = ['Red', 'Orange', 'Yellow', 'Green', 'Blue', 'Indigo', 'Violet']
+rainbow.insert(3, 'Зеленый')
+rainbow.insert(-1, 'Фиолетовый')
+print(['Red', 'Orange', 'Yellow', 'Зеленый', 'Blue', 'Indigo', 'Фиолетовый'])
