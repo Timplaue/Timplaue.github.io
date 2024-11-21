@@ -1,0 +1,13 @@
+n = int(input())
+
+numbers = [int(input()) for i in range(n)]
+
+for number in numbers:
+    print(number)
+
+print()
+
+for number in numbers:
+    result = number**2 + 2 * number + 1
+    print(result)
+

@@ -1,0 +1,12 @@
+n = int(input())
+
+strings = [input() for i in range(n)]
+
+k = int(input())
+
+zaprosi = [input().lower() for x in range(k)]
+
+for string in strings:
+    string_lower = string.lower()
+    if all(zapros in string_lower for zapros in zaprosi):
+        print(string)

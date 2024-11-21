@@ -1,0 +1,16 @@
+n = int(input())
+
+strings = []
+for i in range(n):
+    string = input()
+    strings.append(string)
+
+k = int(input())
+
+result = ""
+for string in strings:
+    if len(string) >= k:
+        result += string[k-1]
+
+print(result)
+

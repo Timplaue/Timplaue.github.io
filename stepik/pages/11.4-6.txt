@@ -1,0 +1,9 @@
+n = int(input())
+
+strings = [input() for i in range(n)]
+
+zapros = input()
+
+for string in strings:
+    if zapros.casefold() in string.casefold():
+        print(string)

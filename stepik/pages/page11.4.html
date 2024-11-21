@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/pages.css">
+    <link rel="stylesheet" href="../styles/fonts.css"> 
+    <link rel="stylesheet" href="../styles/codes.css"> 
+
+    <link rel="icon" type="image/png" href="../favicons/favicon-48x48.png" sizes="48x48" />
+    <link rel="icon" type="image/svg+xml" href="../favicons/favicon.svg" />
+    <link rel="shortcut icon" href="../favicons/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicons/apple-touch-icon.png" />
+    <meta name="apple-mobile-web-app-title" content="Stepik answers" />
+    <link rel="manifest" href="../favicons/site.webmanifest" />
+    <!-- Подключаем стили CodeMirror -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/theme/monokai.min.css">
+
+    <title>Stepik answers</title>
+    <style>
+        body {
+            background-color: #0b0a0f;
+            margin: 0;
+        }
+
+        .layout {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            margin: 0px auto;
+            min-width: 250px;
+        }
+
+        .block1 {
+            background-color: #ffffff;
+            height: 100%;
+            max-width: 1024px;
+            justify-content: space-between;
+            font-family: Opensansregular;
+            padding: 10px; /* Отступы для блоков */
+        }
+        .block1 p {
+            font-family: Opensansbold;
+        }
+
+        .header {
+            min-height: 70px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #12121a;
+            border-radius: 0 0 16px 16px;
+            padding: 0 30px;
+        }
+
+        .text_red {
+            color: red;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--text-color);
+        }
+
+        .logo {
+            max-width: 48px;
+            position: absolute;
+            left: 50px;
+            top: 20px;
+        }
+
+        .logo img {
+            height: 50px;
+            width: 50px;
+            position: absolute;
+        }
+
+        h5 {
+            color: white;
+            font-family: Opensansbold;
+        }
+
+        .site_name {
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        .code-container {
+            margin: 10px 0; /* Отступы между контейнерами */
+            width: 100%; /* Ширина контейнера */
+            position: relative;
+        }
+
+        .CodeMirror {
+            border: 1px solid #ddd;
+            height: auto; /* Высота будет автоматически подстраиваться */
+        }
+
+        #codeEditor {
+            width: 100%; /* Растягиваем textarea по ширине контейнера */
+            height: auto; /* Высота будет автоматически подстраиваться */
+        }
+
+        .task-title {
+            font-weight: bold;
+            margin: 5px 0;
+        }
+
+        .copy-button {
+            background-color: #000000;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px 0; /* Отступ между кнопкой и кодом */
+        }
+
+        .copy-button:hover {
+            background-color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="../index.html">
+            <div class="logo">
+                <img src="../images/favicon.png" alt="Logo">
+            </div>
+            <h5 class="site_name">Stepik <span class="text_red">answers</span></h5>
+        </a>
+    </div>
+    
+    <div class="layout">
+        <div class="block1" id="codeContainer">
+            <!-- Окна с кодом будут добавляться сюда -->
+        </div>
+    </div>
+
+    <!-- Подключаем CodeMirror скрипты -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.5/mode/python/python.min.js"></script>
+    
+    <!-- Скрипт для загрузки кода из текстового файла -->
+    <script>
+        // Функция для создания нового редактора и загрузки кода из файла
+        async function createCodeEditor(fileName, index) {
+            const codeContainer = document.getElementById("codeContainer");
+
+            // Создаем заголовок для задания
+            const taskTitle = document.createElement("div");
+            taskTitle.className = "task-title";
+            taskTitle.innerText = `Задание ${index + 2}`;
+            codeContainer.appendChild(taskTitle);
+
+            const codeDiv = document.createElement("div");
+            codeDiv.className = "code-container";
+            const textArea = document.createElement("textarea");
+            const copyButton = document.createElement("button");
+
+            copyButton.className = "copy-button";
+            copyButton.innerText = "Копировать код";
+            codeDiv.appendChild(textArea);
+            codeDiv.appendChild(copyButton);
+            codeContainer.appendChild(codeDiv);
+
+            const editor = CodeMirror.fromTextArea(textArea, {
+                lineNumbers: true,
+                mode: "python",
+                theme: "monokai",
+                readOnly: false
+            });
+
+            // Загружаем код из файла
+            try {
+                const response = await fetch(fileName);
+                const code = await response.text();
+                editor.setValue(code); // Устанавливаем загруженный код в редактор
+            } catch (error) {
+                console.error(`Ошибка при загрузке файла ${fileName}:`, error);
+            }
+
+            // Добавляем обработчик события для кнопки копирования
+            copyButton.addEventListener("click", () => {
+                const code = editor.getValue();
+                navigator.clipboard.writeText(code)
+                    .then(() => {
+                        alert("Код скопирован в буфер обмена!");
+                    })
+                    .catch(err => {
+                        console.error("Ошибка при копировании кода:", err);
+                    });
+            });
+        }
+
+        // Массив с именами файлов, из которых будет загружаться код
+        const files = [
+            './11.4-2.txt',
+            './11.4-3.txt',
+            './11.4-4.txt',
+            './11.4-5.txt',
+            './11.4-6.txt',
+            './11.4-7.txt',
+            './11.4-8.txt'
+        ];
+
+        // Создаем окна для каждого файла
+        files.forEach((file, index) => createCodeEditor(file, index));
+    </script>
+</body>
+</html>
