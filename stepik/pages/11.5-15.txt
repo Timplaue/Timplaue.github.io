@@ -1,0 +1,6 @@
+s = input()
+z = input()
+chars = list(s)
+s = z.join(chars)
+print(s)
+

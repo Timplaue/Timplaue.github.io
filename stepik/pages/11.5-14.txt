@@ -1,0 +1,9 @@
+s = [int(x) for x in input().split('.')]
+c = 0
+for i in s:
+    if 0 <= i <= 255:
+        c += 1
+if c == 4:
+    print("ДА")
+else:
+    print("НЕТ")

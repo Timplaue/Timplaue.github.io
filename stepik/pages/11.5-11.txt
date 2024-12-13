@@ -1,0 +1,2 @@
+ID = list(input().split())
+print(ID[0][0], ID[1][0], ID[2][0], sep=".", end=".")
