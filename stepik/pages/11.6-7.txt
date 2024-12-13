@@ -1,0 +1,5 @@
+n = input().lower().split()
+a = n.count("a")
+b = n.count("an")
+c = n.count("the")
+print("Общее количество артиклей:", a+b+c)
